@@ -1,7 +1,7 @@
-﻿using Haters.PostAPI.PostData;
+﻿using Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace Haters.PostAPI.Data
+namespace Applicaton.Interfaces
 {
     public interface IPostDbContext
     {

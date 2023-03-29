@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Haters.PostAPI.Common.Mapping
+namespace Applicaton.Common.Mapping
 {
     public interface IMapWith<T>
     {

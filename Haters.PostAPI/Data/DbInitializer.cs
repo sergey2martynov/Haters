@@ -1,4 +1,4 @@
-﻿namespace Haters.PostAPI.Data
+﻿namespace Data
 {
     public class DbInitializer
     {

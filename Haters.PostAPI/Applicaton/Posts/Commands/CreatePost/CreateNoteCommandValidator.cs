@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Applicaton.Posts.Commands.CreatePost;
+using FluentValidation;
 
 namespace Haters.PostAPI.Posts.Commands.CreatePost
 {

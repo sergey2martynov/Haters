@@ -1,8 +1,8 @@
-﻿using Haters.PostAPI.Data;
-using Haters.PostAPI.PostData;
+﻿using Applicaton.Interfaces;
+using Domain;
 using MediatR;
 
-namespace Haters.PostAPI.Posts.Commands.CreatePost
+namespace Applicaton.Posts.Commands.CreatePost
 {
     public class CreatePostCommandHandler
         : IRequestHandler<CreatePostCommand, Guid>

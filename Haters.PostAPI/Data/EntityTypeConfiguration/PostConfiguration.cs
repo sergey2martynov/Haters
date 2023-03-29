@@ -1,8 +1,8 @@
-﻿using Haters.PostAPI.PostData;
+﻿using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Haters.PostAPI.Data
+namespace Data.EntityTypeConfiguration
 {
     public class PostConfiguration : IEntityTypeConfiguration<Post>
     {

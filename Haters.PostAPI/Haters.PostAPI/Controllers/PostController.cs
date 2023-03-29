@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Applicaton.Posts.Commands.CreatePost;
+using AutoMapper;
 using Haters.PostAPI.Data;
 using Haters.PostAPI.PostData;
 using Haters.PostAPI.Posts.Commands.CreatePost;
@@ -15,16 +16,14 @@ namespace Haters.PostAPI.Controllers
     [EnableCors("DefaultPolicy")]
     public class PostController : ControllerBase
     {
-        private readonly IPostHolder _postHolder;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly IMapper _mapper;
         private IMediator _mediator;
         protected IMediator Mediator =>
             _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
-        public PostController(IPostHolder postHolder, IHttpContextAccessor httpContextAccessor, IMapper mapper)
+        public PostController(IHttpContextAccessor httpContextAccessor, IMapper mapper)
         {
-            _postHolder = postHolder;
             _contextAccessor = httpContextAccessor;
             _mapper = mapper;
         }

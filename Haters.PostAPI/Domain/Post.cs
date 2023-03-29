@@ -1,9 +1,8 @@
-﻿using MediatR;
-
-namespace Haters.PostAPI.Posts.Commands.CreatePost
+﻿namespace Domain
 {
-    public class CreatePostCommand : IRequest<Guid>
+    public class Post
     {
+        public Guid Id { get; set; }
         public string UserName { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }

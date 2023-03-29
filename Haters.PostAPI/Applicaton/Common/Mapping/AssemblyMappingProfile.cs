@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using AutoMapper;
 
-namespace Haters.PostAPI.Common.Mapping
+namespace Applicaton.Common.Mapping
 {
     public class AssemblyMappingProfile : Profile
     {
