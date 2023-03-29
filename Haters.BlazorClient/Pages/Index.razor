@@ -1,0 +1,92 @@
+﻿@page "/"
+@using Haters.BlazorClient.Models;
+@using Haters.BlazorClient.Services;
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject IPostService postService;
+@inject NavigationManager _navigationManager;
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<PageTitle>Index</PageTitle>
+
+<h1>Here you see posts </h1>
+
+<AuthorizeView>
+    <Authorized>
+        <div class="container overflow-hidden col-md-4">
+            <div class="row gy-5">
+                @foreach (var post in _posts)
+                {
+                    <div class="text-light bg-dark form-control">
+                        <table class="table">
+                            <td class="text-light">@post.UserName</td>
+                            <td class="text-light">@post.Title</td>
+                        </table>
+                        <p class="text-center">@post.Content </p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="container overflow-hidden col-md-4 mt-4">
+            <div class=" justify-content-md-center">
+                <input class="form-control" @bind-value="title" placeholder="Title"></input>
+            </div>
+            <div class="input-group justify-content-md-center mt-1">
+                <textarea @bind-value="message"
+                          @bind-value:event="oninput"
+                          @onkeyup="HandleInput"
+                          class="form-control"
+                          placeholder="Message"></textarea>
+                <button class="btn btn-primary form-group-append"
+                        @onclick="Send">
+                    Send
+                </button>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        You are not authorized. Go to <a href="/login">Log in</a>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private string title = string.Empty;
+    private string username = string.Empty;
+    private string message = string.Empty;
+
+    private List<PostDto> _posts = new List<PostDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var user = AuthenticationStateProvider.GetAuthenticationStateAsync().Result.User;
+
+        _posts = await postService.GetPosts(user);
+    }
+
+    private async Task Send()
+    {
+        var client = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
+        var user = client.User;
+
+        var postDto = new PostDto
+            {
+                Title = title,
+                UserName = user.Identity.Name,
+                Content = message
+            };
+
+        await postService.SendPost(postDto);
+
+        _navigationManager.NavigateTo("https://localhost:7294", true);
+    }
+
+    private async Task HandleInput(KeyboardEventArgs args)
+    {
+        if (args.Key.Equals("Enter"))
+        {
+            await Send();
+        }
+    }
+}

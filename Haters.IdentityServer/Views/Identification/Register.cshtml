@@ -1,0 +1,33 @@
+﻿@model Haters.IdentityServer.ViewModels.AccountViewModels.RegisterViewModel
+
+<div class="row">
+
+    <div class="col-md-6 offset-md-3">
+
+        <h1>Register zone</h1>
+
+        <form asp-controller="Identification" asp-action="register" method="post">
+            <div asp-validation-summary="All"></div>
+
+            <div class="form-group">
+                <label asp-for="UserName"></label>
+                <input class="form-control" type="text" asp-for="UserName" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input class="form-control" type="password" asp-for="Password" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+                <input class="form-control" type="confirm password" asp-for="ConfirmPassword" />
+            </div>
+
+            <p>
+                <button class="btn btn-primary" type="submit">Register</button>
+            </p>
+
+        </form>
+    </div>
+</div>
